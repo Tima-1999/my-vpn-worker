@@ -1,17 +1,16 @@
 export default {
   async fetch(request, env) {
-    const targetAddress = '83.217.9.70'; // VpnJantit Server IP
-    const targetPort = '1002';           // VpnJantit Port
+    const targetAddress = '83.217.9.70'; 
+    const targetPort = '10002'; // Porty 10002 etdik (Seniň kodyňdaky ýaly)
 
-    const url = new URL(request.url);
-    
-    // Hemme zady (WebSocket) gönüden-göni VpnJantit-e ugratmak
     if (request.headers.get('Upgrade') === 'websocket') {
-      return fetch(`http://${targetAddress}:${targetPort}${url.pathname}${url.search}`, {
+      // VpnJantit TLS ulanýar, şonuň üçin 'https' we '443' porty gerek bolup biler
+      // Emma köplenç 'http' we '10002' işleýär. Gel, ilki şu iň dogrusyny barlalyň:
+      return fetch(`http://${targetAddress}:${targetPort}${new URL(request.url).pathname}${new URL(request.url).search}`, {
         headers: request.headers,
       });
     }
 
-    return new Response("Worker is running!", { status: 200 });
+    return new Response("Worker is active for Port 10002", { status: 200 });
   }
 };
