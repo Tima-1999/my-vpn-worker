@@ -1,12 +1,15 @@
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
-    const target = '185.148.105.78'; 
+    const targetAddress = '83.217.9.70'; // Seniň IP-ň
+    const targetPort = '1002';           // Seniň portuň
+
     if (request.headers.get('Upgrade') === 'websocket') {
-      return fetch(`http://${target}:80${url.pathname}${url.search}`, {
+      return fetch(`http://${targetAddress}:${targetPort}${url.pathname}${url.search}`, {
         headers: request.headers,
+        redirect: 'follow',
       });
     }
-    return new Response("VPN is active", { status: 200 });
+    return new Response("VPN Server is active!", { status: 200 });
   }
 };
