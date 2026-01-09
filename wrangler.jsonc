@@ -1,0 +1,5 @@
+{
+  "name": "my-vpn-worker",
+  "compatibility_date": "2026-01-09",
+  "main": "_worker.js"
+}
