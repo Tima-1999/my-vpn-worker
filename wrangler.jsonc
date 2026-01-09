@@ -1,5 +1,5 @@
 {
-  "name": "my-vpn-worker",
+  "name": "cf-vpn",
   "compatibility_date": "2026-01-09",
   "main": "_worker.js"
 }
