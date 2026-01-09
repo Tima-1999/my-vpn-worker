@@ -1,18 +1,17 @@
 export default {
   async fetch(request, env) {
+    const targetAddress = '83.217.9.70'; // VpnJantit Server IP
+    const targetPort = '1002';           // VpnJantit Port
+
     const url = new URL(request.url);
-    const targetAddress = '83.217.9.70'; 
-    const targetPort = '1002';
-
-    // Cloudflare bloklaryny aşmak üçin Header-leri goraýarys
-    const newHeaders = new Headers(request.headers);
-    newHeaders.set('Host', 'cf-vpn.tmsanly.workers.dev');
-
+    
+    // Hemme zady (WebSocket) gönüden-göni VpnJantit-e ugratmak
     if (request.headers.get('Upgrade') === 'websocket') {
       return fetch(`http://${targetAddress}:${targetPort}${url.pathname}${url.search}`, {
-        headers: newHeaders,
+        headers: request.headers,
       });
     }
-    return new Response("Sistem taze CDN bilen tayyar!", { status: 200 });
+
+    return new Response("Worker is running!", { status: 200 });
   }
 };
